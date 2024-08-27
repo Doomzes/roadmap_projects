@@ -8,11 +8,11 @@ class UserActivity:
     def event(self) -> None:
         for i in json:
             if i['type'] == 'PushEvent':
-                print(f"Pushed {i['payload']['size']} comits to {i['repo']['name']}")
+                print(f"- Pushed {i['payload']['size']} commits to {i['repo']['name']}")
             elif i['type'] == 'IssuesEvent':
-                print(f"{str(i['payload']['action']).capitalize()} a new issue in {i['repo']['name']}")
+                print(f"- {str(i['payload']['action']).capitalize()} a new issue in {i['repo']['name']}")
             elif i['type'] == 'WatchEvent':
-                print(f"Starred {i['repo']['name']}")
+                print(f"- Starred {i['repo']['name']}")
 
 
 user_event = UserActivity()
