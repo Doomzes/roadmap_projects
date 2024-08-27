@@ -5,6 +5,10 @@ class UserActivity:
     def __init__(self):
         self.transactions = []
 
+    def wrap_text(self, text, width) -> None:
+        #Разбивает текст на строки длиной не более width символов.
+        return [text[i:i + width] for i in range(0, len(text), width)]
+
     def event(self) -> None:
         header = f"{'ID':<4} {'Name events':<52} {'Date':<20}"
         print(header)
@@ -22,7 +26,12 @@ class UserActivity:
                      "Date": f"{str(i['created_at'])[:10]} {str(i['created_at'])[11:19]}"})
 
         for transaction in self.transactions:
-            print(f"{transaction['ID']:<4} {transaction['Name events']:<52} {transaction['Date']:<12}")
+            description_lines = self.wrap_text(transaction['Name events'], 52)
+            print(f"{transaction['ID']:<4} {description_lines[0]:<52} {transaction['Date']:<12}")
+
+            for line in description_lines[1:]:
+                print(f"{'':<4} {line:<52}")
+
 
 
 user_event = UserActivity()
