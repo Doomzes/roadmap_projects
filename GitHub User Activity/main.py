@@ -1,6 +1,21 @@
 import argparse
 import requests
 
+class UserActivity:
+    def __init__(self):
+        pass
+
+    def event(self) -> None:
+        for i in json:
+            if i['type'] == 'PushEvent':
+                print(f"Pushed {i['payload']['size']} comits to {i['repo']['name']}")
+            elif i['type'] == 'IssuesEvent':
+                print(f"{str(i['payload']['action']).capitalize()} a new issue in {i['repo']['name']}")
+            elif i['type'] == 'WatchEvent':
+                print(f"Starred {i['repo']['name']}")
+
+
+user_event = UserActivity()
 
 parser = argparse.ArgumentParser(description="Task management system")
 parser.add_argument('name_user', help='Name user')
@@ -13,6 +28,6 @@ json = res.json()
 
 if res.status_code == 200:
     print("User is found")
-    print(json[0]['type'])
+    user_event.event()
 elif res.status_code == 404:
     print("User if not found")
