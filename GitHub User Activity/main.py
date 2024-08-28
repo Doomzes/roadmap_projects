@@ -1,6 +1,7 @@
 import argparse
 import requests
 
+
 class UserActivity:
     def __init__(self):
         self.transactions = []
