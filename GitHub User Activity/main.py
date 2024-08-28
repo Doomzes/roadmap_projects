@@ -45,7 +45,8 @@ res = requests.get(f'https://api.github.com/users/{args.name_user}/events')
 
 json = res.json()
 
-if res.status_code == 200:
-    user_event.event()
-elif res.status_code == 404:
-    print("User is not found")
+if __name__ == "__main__":
+    if res.status_code == 200:
+        user_event.event()
+    elif res.status_code == 404:
+        print("User is not found")
