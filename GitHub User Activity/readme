@@ -1,0 +1,60 @@
+Overview
+The UserActivity script is designed to fetch and display recent GitHub activity for a specified user. It connects to the GitHub API, retrieves the user's events, and prints a formatted table of those events to the console. Events include push events, issue events, and watch (star) events, with their corresponding details.
+
+Features
+Fetches GitHub user events: Connects to the GitHub API to get recent activities of a specified user.
+Formatted output: Displays the results in a neatly formatted table, with long event descriptions wrapped across multiple lines.
+Supports command-line arguments: Allows the user to specify a GitHub username directly from the command line.
+Installation
+Ensure you have Python installed. This script requires the requests library, which can be installed via pip:
+
+bash
+Копировать код
+pip install requests
+Usage
+You can run the script from the command line by passing the GitHub username as an argument:
+
+bash
+Копировать код
+python user_activity.py <GitHub Username>
+Example
+bash
+Копировать код
+python user_activity.py octocat
+This will output a table of recent events for the GitHub user octocat:
+
+plaintext
+Копировать код
+ID   Name events                                           Date                
+------------------------------------------------------------------------------
+1    Pushed 2 commits to octocat/Hello-World               2024-08-24 12:34:56
+2    Starred octocat/Hello-World                           2024-08-23 11:22:33
+3    Opened a new issue in octocat/Hello-World             2024-08-22 10:11:12
+If the event description exceeds 52 characters, it will wrap to the next line.
+
+Code Explanation
+Imports
+argparse: Used to handle command-line arguments.
+requests: Used to make HTTP requests to the GitHub API.
+Class: UserActivity
+This class is responsible for processing and formatting the events.
+
+__init__(): Initializes an empty list self.transactions to store the formatted event data.
+
+wrap_text(text, width): Breaks a long text string into multiple lines, each with a maximum width of 52 characters.
+
+event():
+
+Fetches and processes GitHub user events.
+Filters and formats specific event types (PushEvent, IssuesEvent, WatchEvent).
+Outputs the results in a formatted table.
+Main Execution
+The script is executed by passing a GitHub username as an argument.
+If the user is found (status_code 200), the event() method is called to display the events.
+If the user is not found (status_code 404), an error message is printed.
+Error Handling
+If the GitHub user is not found (HTTP 404), the script will print "User is not found".
+If any other error occurs, it should be handled as per the HTTP response status code.
+Dependencies
+Python 3.x
+requests library
