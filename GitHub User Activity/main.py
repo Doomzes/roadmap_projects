@@ -48,4 +48,4 @@ json = res.json()
 if res.status_code == 200:
     user_event.event()
 elif res.status_code == 404:
-    print("User if not found")
+    print("User is not found")
