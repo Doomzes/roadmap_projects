@@ -19,8 +19,14 @@ class UserActivity:
                 self.transactions.append({"ID": f"{len(self.transactions) + 1}", "Name events": f"Pushed {i['payload']['size']} commits to {i['repo']['name']}",
                                           "Date": f"{str(i['created_at'])[:10]} {str(i['created_at'])[11:19]}"})
             elif i['type'] == 'IssuesEvent':
-                self.transactions.append({"ID": f"{len(self.transactions) + 1}", "Name events": f"{str(i['payload']['action']).capitalize()} a new issue in {i['repo']['name']}",
-                     "Date": f"{str(i['created_at'])[:10]} {str(i['created_at'])[11:19]}"})
+                if i['payload']['action'] == 'opened':
+                    self.transactions.append({"ID": f"{len(self.transactions) + 1}",
+                                              "Name events": f"{str(i['payload']['action']).capitalize()} a new issue in {i['repo']['name']}",
+                                              "Date": f"{str(i['created_at'])[:10]} {str(i['created_at'])[11:19]}"})
+                else:
+                    self.transactions.append({"ID": f"{len(self.transactions) + 1}",
+                                              "Name events": f"{str(i['payload']['action']).capitalize()} issue in {i['repo']['name']}",
+                                              "Date": f"{str(i['created_at'])[:10]} {str(i['created_at'])[11:19]}"})
             elif i['type'] == 'WatchEvent':
                 self.transactions.append(
                     {"ID": f"{len(self.transactions) + 1}", "Name events": f"Starred {i['repo']['name']}",
